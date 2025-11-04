@@ -12,9 +12,11 @@
 <header class="header">
     <div class="header_wrapper">
         <div>
-            <img class="header_logo" src="<?php echo esc_url(get_theme_file_uri('src/icons/logo.svg')); ?>"
-                 alt="irev logo"/>
+            <?php $image = get_field('header_logo'); ?>
+            <img class="header_logo" src="<?php echo esc_url($image['url']); ?>"
+                 alt="<?php echo $image['alt']; ?>"/>
         </div>
+        <?php irev_nav_menu( [ 'menu'  => 'header' ] ); ?>
         <nav class="header_nav">
             <div class="header_menu">
                 <div class="header_menu_item" data-dropdown-trigger="product">
@@ -100,9 +102,9 @@
                 </div>
             </div>
         </nav>
-        <button class="header_signIn">
-            Sign In
-        </button>
+        <?php if( get_field('header_signin') ): ?>
+            <button class="header_signIn"><?php the_field('header_signin'); ?></button>
+        <?php endif; ?>
         <button class="header_hamburger">
             <img src="<?php echo esc_url(get_theme_file_uri('src/icons/hamburgerIcon.svg')); ?>"
                  alt="hamburger"

@@ -9,44 +9,30 @@
             <div class="home_popup_content_upper">
                 <div class="home_popup_content_label">
                     <div class="home_popup_content_label_wrapper">
-                        <span>Hurry up</span>
+                        <?php if( get_field('home_popup_content_label_wrapper') ): ?>
+                            <span><?php the_field('home_popup_content_label_wrapper'); ?></span>
+                        <?php endif; ?>
                         <span
                                 class="home_popup_content_label_wrapper_counter">
-                        00:15:00
+                        <?php if( get_field('home_popup_content_label_wrapper_counter') ): ?>
+                            <?php the_field('home_popup_content_label_wrapper_counter'); ?>
+                        <?php endif; ?>
                     </span>
-                    </div>
-                    <span>20% discount for the first month</span>
+                    </div>     
+                    <?php if( get_field('home_popup_content_label_discount') ): ?>
+                        <span><?php the_field('home_popup_content_label_discount'); ?></span>
+                    <?php endif; ?>
                 </div>
                 <button><img src="<?php echo esc_url(get_theme_file_uri('src/icons/cancel.svg')); ?>" alt="cancel"/></button>
             </div>
-        <h2>Irev puts your partner program on the fast track to real growth</h2>
+            
+        <?php if( get_field('home_popup_content_title') ): ?>
+            <h2><?php the_field('home_popup_content_title'); ?></h2>
+        <?php endif; ?>
         <div class="home_popup_content_lower">
-            <form>
-                <div class="home_popup_content_form_inputs">
-                    <input type="text" placeholder="Business name"/>
-                    <input type="text" placeholder="Name"/>
-                    <input type="email" placeholder="E-mail"/>
-                    <input type="url" placeholder="Telegram / WatsApp"/>
-                    <input type="number" placeholder="+ Phone Number"/>
-                    <input type="text" placeholder="Vertical"/>
-                    <input type="text" placeholder="I am looking for"/>
-                </div>
-                <button id="submitButton">get walkthrough</button>
-                <div class="home_popup_content_form_container">
-                    <div class="home_popup_content_form_checkbox">
-                        <label class="checkbox">
-                            <input type="checkbox" id="policyCheckbox">
-                        </label>
-                        <span><p>By signing up you agree to </p><a>IREV Policy</a></span>
-                    </div>
-                    <div class="home_popup_content_form_checkbox">
-                        <label class="checkbox">
-                            <input type="checkbox" id="agreeCheckbox">
-                        </label>
-                        <span>I agree to receive promotional texts</span>
-                    </div>
-                </div>
-            </form>
+
+            <?php echo do_shortcode( '[contact-form-7 id="1b6adf2" title="popup2"]' );  ?>
+            
             <div class="home_popup_content_lower_rightcont">
                 <div class="home_popup_content_lower_rightcont_video">
                     <video width="100%" id="popupVideo">
@@ -54,18 +40,26 @@
                     </video>
                         <img src="<?php echo esc_url(get_theme_file_uri('src/icons/playbutton.svg')); ?>" alt="play" />
                 </div>
-                <span>Watch IREV live review now [2 min]</span>
+                <?php if( get_field('home_popup_content_lower_rightcont_title') ): ?>
+                    <span><?php the_field('home_popup_content_lower_rightcont_title'); ?></span>
+                <?php endif; ?>
                 <div class="home_popup_content_lower_rightcont_lower">
                     <div class="home_popup_content_lower_rightcont_lower_phrase">
-                        <span>
-                            IREV covers everything for the convenient and effective management of affiliate programs. We've been very happy with the platform and support from day one.
-                        </span>
-                        <img src="<?php echo esc_url(get_theme_file_uri('src/icons/danielgram.svg')); ?>" alt="daniel" />
+                        <?php if( get_field('home_popup_content_lower_rightcont_lower_phrase') ): ?>
+                            <span><?php the_field('home_popup_content_lower_rightcont_lower_phrase'); ?></span>
+                        <?php endif; ?>
+                        <?php $image = get_field('home_popup_content_lower_rightcont_lower_phrase_img'); ?>
+                        <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo $image['alt']; ?>" />
                     </div>
                     <div class="home_popup_content_lower_rightcont_lower_award">
-                        <img src="<?php echo esc_url(get_theme_file_uri('src/icons/award.svg')); ?>" alt="award" />
-                        <span class="home_popup_content_lower_rightcont_lower_award_title">SIGMA Award Winner</span>
-                        <span class="home_popup_content_lower_rightcont_lower_award_text">Best marketing solution provider 2024</span>
+                        <?php $image = get_field('home_popup_content_lower_rightcont_lower_award'); ?>
+                        <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo $image['alt']; ?>" />
+                        <?php if( get_field('home_popup_content_lower_rightcont_lower_award_title') ): ?>
+                            <span class="home_popup_content_lower_rightcont_lower_award_title"><?php the_field('home_popup_content_lower_rightcont_lower_award_title'); ?></span>
+                        <?php endif; ?>
+                        <?php if( get_field('home_popup_content_lower_rightcont_lower_award_text') ): ?>
+                            <span class="home_popup_content_lower_rightcont_lower_award_text"><?php the_field('home_popup_content_lower_rightcont_lower_award_text'); ?></span>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
