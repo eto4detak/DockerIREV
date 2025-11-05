@@ -826,3 +826,13 @@
 .home_popup_content span.wpcf7-spinner {
   display: none;
 }
+
+//menu
+ul.sub-menu{
+  display: none;
+}
+.header_menu_item .main-menu-item{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

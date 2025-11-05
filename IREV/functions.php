@@ -101,7 +101,9 @@ class My_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$class_names = esc_attr( implode( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) ) );
 
 		// создание HTML
-		$output .= $indent . '<li id="nav-menu-item-'. $item->ID . '" class="' . $depth_class_names . ' ' . $class_names . '">';
+		$output .= $indent . ( $depth == 0 ? '<div class="header_menu_item header_menu_item0" data-dropdown-trigger="'.strtolower($item->title).'">' : '<div class="header_menu_item" data-dropdown-trigger="'.strtolower($item->title).'">' ) .
+		'<div class="header_menu_item_inner">
+						<li id="nav-menu-item-'. $item->ID . '" class="' . $depth_class_names . ' ' . $class_names . '">';
 
 		// атрибуты ссылки
 		$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
@@ -110,13 +112,20 @@ class My_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
 		$attributes .= ' class="menu-link ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
 
-		$item_output = strtr( '{BEFORE}<a{ATTRIBUTES}>{LINK_BEFORE}{TITLE}{LINK_AFTER}</a>{AFTER}', [
+		$image_item = '<img src="/wp-content/themes/IREV/src/icons/miniArrow.svg" alt="arrow"
+		 class="header_menu_item_arrow_unselected" />
+                        <img src="/wp-content/themes/IREV/src/icons/arrowSelected.svg" alt="arrow"
+                        class="header_menu_item_arrow_selected"/>';
+		$image_item = $depth > 0 ? '' : $image_item;
+
+		$item_output = strtr( '{BEFORE}<a{ATTRIBUTES}>{LINK_BEFORE}{TITLE}{LINK_AFTER}</a>{IMG}{AFTER}</li></div></div>', [
 			'{BEFORE}'      => $args->before,
 			'{ATTRIBUTES}'  => $attributes,
 			'{LINK_BEFORE}' => $args->link_before,
 			'{TITLE}'       => apply_filters( 'the_title', $item->title, $item->ID ),
 			'{LINK_AFTER}'  => $args->link_after,
 			'{AFTER}'       => $args->after,
+			'{IMG}'       	=> $image_item,
 		] );
 
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
